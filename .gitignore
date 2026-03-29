@@ -1,0 +1,10 @@
+# Ignore everything
+*
+
+# But keep these files in the repo
+!.gitignore
+!README.md
+!vscode_lms_proxy.mjs
+
+
+
