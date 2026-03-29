@@ -360,8 +360,13 @@ async function showHandler(req, res) {
     if (!OLLAMA_SHOW) {
       const lmModel = await resolveModelKey(model);
       const capabilities = ["completion"];
+      
+      // Check for additional capabilities from LMStudio model metadata
       if (lmModel.capabilities?.trained_for_tool_use) {
-        capabilities.push("tools", "thinking");
+        capabilities.push("tools");
+      }
+      if (lmModel.capabilities?.vision) {
+        capabilities.push("vision");
       }
 
       let modelDetails;
