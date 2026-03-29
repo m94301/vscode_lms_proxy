@@ -2,7 +2,6 @@
 
 import http from "http";
 import url from "url";
-import crypto from "crypto";
 import os from "os";
 import fs from "fs";
 import path from "path";
@@ -174,10 +173,6 @@ async function resolveModelKey(displayName) {
   }
 }
 
-function generateDigest(modelKey) {
-  return crypto.createHash("sha256").update(modelKey).digest("hex");
-}
-
 // ========== ADAPTERS & HELPERS ==========
 
 function createStreamConverter(mode) {
@@ -327,7 +322,6 @@ async function tagsHandler(req, res) {
         model: m.display_name,
         modified_at: new Date().toISOString(),
         size: m.size_bytes || 0,
-        digest: generateDigest(m.key),
         details: {
           parent_model: "",
           format: m.format || "gguf",
