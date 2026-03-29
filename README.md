@@ -7,6 +7,8 @@ Run with
   node vscode_lms_proxy.mjs
 or
   node vscode_lms_proxy.mjs --help
+or
+  update the shebang at the top of the script (#!/usr/bin/env node), chmod +x, and run directly
 
 It is more convenient to run this script on the same machine (localhost) that is running LM Studio.  If LMS is on another machine, set the LMS address with 
 LMSTUDIO_URL="http://your-host:1234" node vscode_lms_proxy.mjs
@@ -22,6 +24,7 @@ node vscode_lms_proxy.mjs
 - Code will show your list of models and their context limits.  Crank up the context limits in LMS if needed, then restart Code to rescan.
 -  To enable a model for use, click the eyeball next to model name to highlight it in white and enable usage
 - Models need TOOL ability to act as agent
+- NOTE: If you change models, you likely need to restart vscode to get it to reread the list and capabilities.  You generally do NOT have to restart the proxy, but it's worth a shot if your fresh new model is not showing in the list.
 
 
 

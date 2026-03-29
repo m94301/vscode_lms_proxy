@@ -1,3 +1,5 @@
+#!/home/lmstudio/.nvm/versions/node/v18.20.8/bin/node
+
 import http from "http";
 import url from "url";
 import crypto from "crypto";
@@ -369,20 +371,9 @@ async function showHandler(req, res) {
         capabilities.push("vision");
       }
 
-      let modelDetails;
-      try {
-        const detailRes = await fetch(`${LMSTUDIO_URL}/api/v0/models/${lmModel.key}`, {
-          timeout: TIMEOUT_MS
-        });
-        if (detailRes.ok) {
-          modelDetails = await detailRes.json();
-        }
-      } catch (err) {
-        logger.warn(`Could not fetch detailed model info: ${err.message}`);
-      }
-
-      const architecture = modelDetails?.arch || lmModel.key;
-      const contextLength = modelDetails?.max_context_length || 655536;
+      // All data we need is already in lmModel from /api/v1/models
+      const architecture = lmModel.architecture || lmModel.key;
+      const contextLength = lmModel.max_context_length || 32768;
 
       const response = {
         capabilities,
